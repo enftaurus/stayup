@@ -11,7 +11,7 @@ import (
 func UserSession(session_details models.User_session, ctx context.Context) error {
 	_, err := utils.DB.Exec(
 		ctx,
-		`INSERT INTO user_session (
+		`INSERT INTO user_sessions (
             user_id,refresh_token_hash,expires_at,ip_address,user_agent ) VALUES ($1,$2,$3,$4,$5)`,
 		session_details.UserId,
 		session_details.RefreshToken,

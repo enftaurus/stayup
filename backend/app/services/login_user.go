@@ -35,7 +35,7 @@ func user_login(uuid pgtype.UUID, metadata models.Userip, ctx context.Context) (
 		Ip:           &metadata.Ip,
 		UserAgent:    metadata.UserAgent,
 	}
-	err := repository.UserSession(user_session, ctx)
+	err = repository.UserSession(user_session, ctx)
 	if err != nil {
 		log.Println(err)
 		return "", err

@@ -127,6 +127,7 @@ func GIthubCallback(c *gin.Context) {
 		false,
 		true,
 	)
+	log.Println(RefreshToken)
 	c.JSON(200, gin.H{"data": data1})
 
 }
