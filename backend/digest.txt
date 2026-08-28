@@ -1,0 +1,1062 @@
+Directory structure:
+└── backend/
+    ├── go.mod
+    ├── go.sum
+    ├── main.go
+    ├── routes.go
+    ├── schema.sql
+    ├── app/
+    │   ├── api/
+    │   │   ├── auth.go
+    │   │   ├── auth_types.go
+    │   │   └── health.go
+    │   ├── models/
+    │   │   ├── user.go
+    │   │   └── user_session.go
+    │   ├── repository/
+    │   │   ├── register.go
+    │   │   ├── user_session.go
+    │   │   └── userid.go
+    │   └── services/
+    │       ├── github.go
+    │       ├── login_user.go
+    │       ├── user_auth.go
+    │       └── user_registrtion.go
+    ├── config/
+    │   └── config.go
+    └── utils/
+        ├── database.go
+        ├── random_refreshtoken.go
+        └── util.go
+
+================================================
+FILE: go.mod
+================================================
+module github.com/enftaurus/stayup
+
+go 1.26
+
+require (
+	github.com/bytedance/gopkg v0.1.3 // indirect
+	github.com/bytedance/sonic v1.15.0 // indirect
+	github.com/bytedance/sonic/loader v0.5.0 // indirect
+	github.com/cloudwego/base64x v0.1.6 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.12 // indirect
+	github.com/gin-contrib/sse v1.1.0 // indirect
+	github.com/gin-gonic/gin v1.12.0 // indirect
+	github.com/go-playground/locales v0.14.1 // indirect
+	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/go-playground/validator/v10 v10.30.1 // indirect
+	github.com/goccy/go-json v0.10.5 // indirect
+	github.com/goccy/go-yaml v1.19.2 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
+	github.com/jackc/pgx/v5 v5.10.0 // indirect
+	github.com/jackc/puddle/v2 v2.2.2 // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
+	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
+	github.com/leodido/go-urn v1.4.0 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
+	github.com/quic-go/qpack v0.6.0 // indirect
+	github.com/quic-go/quic-go v0.59.0 // indirect
+	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
+	github.com/ugorji/go/codec v1.3.1 // indirect
+	go.mongodb.org/mongo-driver/v2 v2.5.0 // indirect
+	golang.org/x/arch v0.22.0 // indirect
+	golang.org/x/crypto v0.48.0 // indirect
+	golang.org/x/net v0.51.0 // indirect
+	golang.org/x/sync v0.19.0 // indirect
+	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/text v0.34.0 // indirect
+	google.golang.org/protobuf v1.36.10 // indirect
+)
+
+
+
+================================================
+FILE: go.sum
+================================================
+github.com/bytedance/gopkg v0.1.3 h1:TPBSwH8RsouGCBcMBktLt1AymVo2TVsBVCY4b6TnZ/M=
+github.com/bytedance/gopkg v0.1.3/go.mod h1:576VvJ+eJgyCzdjS+c4+77QF3p7ubbtiKARP3TxducM=
+github.com/bytedance/sonic v1.15.0 h1:/PXeWFaR5ElNcVE84U0dOHjiMHQOwNIx3K4ymzh/uSE=
+github.com/bytedance/sonic v1.15.0/go.mod h1:tFkWrPz0/CUCLEF4ri4UkHekCIcdnkqXw9VduqpJh0k=
+github.com/bytedance/sonic/loader v0.5.0 h1:gXH3KVnatgY7loH5/TkeVyXPfESoqSBSBEiDd5VjlgE=
+github.com/bytedance/sonic/loader v0.5.0/go.mod h1:AR4NYCk5DdzZizZ5djGqQ92eEhCCcdf5x77udYiSJRo=
+github.com/cloudwego/base64x v0.1.6 h1:t11wG9AECkCDk5fMSoxmufanudBtJ+/HemLstXDLI2M=
+github.com/cloudwego/base64x v0.1.6/go.mod h1:OFcloc187FXDaYHvrNIjxSe8ncn0OOM8gEHfghB2IPU=
+github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/gabriel-vasile/mimetype v1.4.12 h1:e9hWvmLYvtp846tLHam2o++qitpguFiYCKbn0w9jyqw=
+github.com/gabriel-vasile/mimetype v1.4.12/go.mod h1:d+9Oxyo1wTzWdyVUPMmXFvp4F9tea18J8ufA774AB3s=
+github.com/gin-contrib/sse v1.1.0 h1:n0w2GMuUpWDVp7qSpvze6fAu9iRxJY4Hmj6AmBOU05w=
+github.com/gin-contrib/sse v1.1.0/go.mod h1:hxRZ5gVpWMT7Z0B0gSNYqqsSCNIJMjzvm6fqCz9vjwM=
+github.com/gin-gonic/gin v1.12.0 h1:b3YAbrZtnf8N//yjKeU2+MQsh2mY5htkZidOM7O0wG8=
+github.com/gin-gonic/gin v1.12.0/go.mod h1:VxccKfsSllpKshkBWgVgRniFFAzFb9csfngsqANjnLc=
+github.com/go-playground/locales v0.14.1 h1:EWaQ/wswjilfKLTECiXz7Rh+3BjFhfDFKv/oXslEjJA=
+github.com/go-playground/locales v0.14.1/go.mod h1:hxrqLVvrK65+Rwrd5Fc6F2O76J/NuW9t0sjnWqG1slY=
+github.com/go-playground/universal-translator v0.18.1 h1:Bcnm0ZwsGyWbCzImXv+pAJnYK9S473LQFuzCbDbfSFY=
+github.com/go-playground/universal-translator v0.18.1/go.mod h1:xekY+UJKNuX9WP91TpwSH2VMlDf28Uj24BCp08ZFTUY=
+github.com/go-playground/validator/v10 v10.30.1 h1:f3zDSN/zOma+w6+1Wswgd9fLkdwy06ntQJp0BBvFG0w=
+github.com/go-playground/validator/v10 v10.30.1/go.mod h1:oSuBIQzuJxL//3MelwSLD5hc2Tu889bF0Idm9Dg26cM=
+github.com/goccy/go-json v0.10.5 h1:Fq85nIqj+gXn/S5ahsiTlK3TmC85qgirsdTP/+DeaC4=
+github.com/goccy/go-json v0.10.5/go.mod h1:oq7eo15ShAhp70Anwd5lgX2pLfOS3QCiwU/PULtXL6M=
+github.com/goccy/go-yaml v1.19.2 h1:PmFC1S6h8ljIz6gMRBopkjP1TVT7xuwrButHID66PoM=
+github.com/goccy/go-yaml v1.19.2/go.mod h1:XBurs7gK8ATbW4ZPGKgcbrY1Br56PdM69F7LkFRi1kA=
+github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
+github.com/jackc/pgpassfile v1.0.0 h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=
+github.com/jackc/pgpassfile v1.0.0/go.mod h1:CEx0iS5ambNFdcRtxPj5JhEz+xB6uRky5eyVu/W2HEg=
+github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 h1:iCEnooe7UlwOQYpKFhBabPMi4aNAfoODPEFNiAnClxo=
+github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761/go.mod h1:5TJZWKEWniPve33vlWYSoGYefn3gLQRzjfDlhSJ9ZKM=
+github.com/jackc/pgx/v5 v5.10.0 h1:VhSvgU2jSli8o3AqIEOTJr7rZwAEUVo4E4XhR94Zfr0=
+github.com/jackc/pgx/v5 v5.10.0/go.mod h1:mal1tBGAFfLHvZzaYh77YS/eC6IX9OWbRV1QIIM0Jn4=
+github.com/jackc/puddle/v2 v2.2.2 h1:PR8nw+E/1w0GLuRFSmiioY6UooMp6KJv0/61nB7icHo=
+github.com/jackc/puddle/v2 v2.2.2/go.mod h1:vriiEXHvEE654aYKXXjOvZM39qJ0q+azkZFrfEOc3H4=
+github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
+github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
+github.com/json-iterator/go v1.1.12 h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=
+github.com/json-iterator/go v1.1.12/go.mod h1:e30LSqwooZae/UwlEbR2852Gd8hjQvJoHmT4TnhNGBo=
+github.com/klauspost/cpuid/v2 v2.3.0 h1:S4CRMLnYUhGeDFDqkGriYKdfoFlDnMtqTiI/sFzhA9Y=
+github.com/klauspost/cpuid/v2 v2.3.0/go.mod h1:hqwkgyIinND0mEev00jJYCxPNVRVXFQeu1XKlok6oO0=
+github.com/leodido/go-urn v1.4.0 h1:WT9HwE9SGECu3lg4d/dIA+jxlljEa1/ffXKmRjqdmIQ=
+github.com/leodido/go-urn v1.4.0/go.mod h1:bvxc+MVxLKB4z00jd1z+Dvzr47oO32F/QSNjSBOlFxI=
+github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
+github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
+github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
+github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd h1:TRLaZ9cD/w8PVh93nsPXa1VrQ6jlwL5oN8l14QlcNfg=
+github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
+github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9Gz0M=
+github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
+github.com/pelletier/go-toml/v2 v2.2.4 h1:mye9XuhQ6gvn5h28+VilKrrPoQVanw5PMw/TB0t5Ec4=
+github.com/pelletier/go-toml/v2 v2.2.4/go.mod h1:2gIqNv+qfxSVS7cM2xJQKtLSTLUE9V8t9Stt+h56mCY=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/quic-go/qpack v0.6.0 h1:g7W+BMYynC1LbYLSqRt8PBg5Tgwxn214ZZR34VIOjz8=
+github.com/quic-go/qpack v0.6.0/go.mod h1:lUpLKChi8njB4ty2bFLX2x4gzDqXwUpaO1DP9qMDZII=
+github.com/quic-go/quic-go v0.59.0 h1:OLJkp1Mlm/aS7dpKgTc6cnpynnD2Xg7C1pwL6vy/SAw=
+github.com/quic-go/quic-go v0.59.0/go.mod h1:upnsH4Ju1YkqpLXC305eW3yDZ4NfnNbmQRCMWS58IKU=
+github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
+github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
+github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=
+github.com/stretchr/objx v0.5.2/go.mod h1:FRsXN1f5AsAjCGJKqEizvkpNtU+EGNCLh3NxZ/8L+MA=
+github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
+github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
+github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
+github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
+github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
+github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
+github.com/ugorji/go/codec v1.3.1 h1:waO7eEiFDwidsBN6agj1vJQ4AG7lh2yqXyOXqhgQuyY=
+github.com/ugorji/go/codec v1.3.1/go.mod h1:pRBVtBSKl77K30Bv8R2P+cLSGaTtex6fsA2Wjqmfxj4=
+go.mongodb.org/mongo-driver/v2 v2.5.0 h1:yXUhImUjjAInNcpTcAlPHiT7bIXhshCTL3jVBkF3xaE=
+go.mongodb.org/mongo-driver/v2 v2.5.0/go.mod h1:yOI9kBsufol30iFsl1slpdq1I0eHPzybRWdyYUs8K/0=
+golang.org/x/arch v0.22.0 h1:c/Zle32i5ttqRXjdLyyHZESLD/bB90DCU1g9l/0YBDI=
+golang.org/x/arch v0.22.0/go.mod h1:dNHoOeKiyja7GTvF9NJS1l3Z2yntpQNzgrjh1cU103A=
+golang.org/x/crypto v0.48.0 h1:/VRzVqiRSggnhY7gNRxPauEQ5Drw9haKdM0jqfcCFts=
+golang.org/x/crypto v0.48.0/go.mod h1:r0kV5h3qnFPlQnBSrULhlsRfryS2pmewsg+XfMgkVos=
+golang.org/x/net v0.51.0 h1:94R/GTO7mt3/4wIKpcR5gkGmRLOuE/2hNGeWq/GBIFo=
+golang.org/x/net v0.51.0/go.mod h1:aamm+2QF5ogm02fjy5Bb7CQ0WMt1/WVM7FtyaTLlA9Y=
+golang.org/x/sync v0.17.0 h1:l60nONMj9l5drqw6jlhIELNv9I0A4OFgRsG9k2oT9Ug=
+golang.org/x/sync v0.17.0/go.mod h1:9KTHXmSnoGruLpwFjVSX0lNNA75CykiMECbovNTZqGI=
+golang.org/x/sync v0.19.0 h1:vV+1eWNmZ5geRlYjzm2adRgW2/mcpevXNg50YZtPCE4=
+golang.org/x/sync v0.19.0/go.mod h1:9KTHXmSnoGruLpwFjVSX0lNNA75CykiMECbovNTZqGI=
+golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.41.0 h1:Ivj+2Cp/ylzLiEU89QhWblYnOE9zerudt9Ftecq2C6k=
+golang.org/x/sys v0.41.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
+golang.org/x/text v0.29.0 h1:1neNs90w9YzJ9BocxfsQNHKuAT4pkghyXc4nhZ6sJvk=
+golang.org/x/text v0.29.0/go.mod h1:7MhJOA9CD2qZyOKYazxdYMF85OwPdEr9jTtBpO7ydH4=
+golang.org/x/text v0.34.0 h1:oL/Qq0Kdaqxa1KbNeMKwQq0reLCCaFtqu2eNuSeNHbk=
+golang.org/x/text v0.34.0/go.mod h1:homfLqTYRFyVYemLBFl5GgL/DWEiH5wcsQ5gSh1yziA=
+google.golang.org/protobuf v1.36.10 h1:AYd7cD/uASjIL6Q9LiTjz8JLcrh/88q5UObnmY3aOOE=
+google.golang.org/protobuf v1.36.10/go.mod h1:HTf+CrKn2C3g5S8VImy6tdcUvCska2kB7j23XfzDpco=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
+gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
+
+
+
+================================================
+FILE: main.go
+================================================
+package main
+
+import (
+	"log"
+
+	"github.com/enftaurus/stayup/config"
+	"github.com/enftaurus/stayup/utils"
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	config.LoadEnv()
+	err := utils.Connect(config.GetEnv("DB_URL"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer utils.DB.Close()
+	log.Println("Connected to PostgreSQL")
+	router := gin.Default()
+	RegisterRoutes(router)
+	router.Run(":8080")
+}
+
+
+
+================================================
+FILE: routes.go
+================================================
+package main
+
+import (
+	"github.com/enftaurus/stayup/app/api"
+	"github.com/gin-gonic/gin"
+)
+
+func RegisterRoutes(router *gin.Engine) {
+	router.GET("/health", api.Health)
+	auth := router.Group("/auth")
+	{
+		auth.GET("/url", api.GithubURL)
+		auth.GET("/github/callback", api.GIthubCallback)
+	}
+}
+
+
+
+================================================
+FILE: schema.sql
+================================================
+-- =====================================================
+-- EXTENSIONS
+-- =====================================================
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- =====================================================
+-- ENUMS
+-- =====================================================
+
+CREATE TYPE http_method AS ENUM (
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'HEAD',
+    'OPTIONS'
+);
+
+CREATE TYPE monitor_status AS ENUM (
+    'UNKNOWN',
+    'UP',
+    'DOWN',
+    'PAUSED'
+);
+
+CREATE TYPE notification_type AS ENUM (
+    'EMAIL',
+    'DISCORD',
+    'SLACK',
+    'WEBHOOK'
+);
+
+-- =====================================================
+-- USERS
+-- =====================================================
+
+C
+CREATE INDEX idx_users_github_id ON users(github_id);
+
+-- =====================================================
+-- USER SESSIONS
+-- =====================================================
+
+CREATE TABLE user_sessions (
+                               id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                               user_id UUID NOT NULL
+                                   REFERENCES users(id)
+                                       ON DELETE CASCADE,
+
+                               refresh_token_hash TEXT NOT NULL,
+
+                               expires_at TIMESTAMPTZ NOT NULL,
+
+                               ip_address INET,
+                               user_agent TEXT,
+
+                               created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                               last_used_at TIMESTAMPTZ
+);
+
+CREATE INDEX idx_sessions_user
+    ON user_sessions(user_id);
+
+-- =====================================================
+-- MONITORS
+-- =====================================================
+
+CREATE TABLE monitors (
+
+                          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                          user_id UUID NOT NULL
+                              REFERENCES users(id)
+                                  ON DELETE CASCADE,
+
+                          name VARCHAR(255) NOT NULL,
+
+                          url TEXT NOT NULL,
+
+                          method http_method NOT NULL DEFAULT 'GET',
+
+                          expected_status SMALLINT NOT NULL DEFAULT 200,
+
+                          interval_seconds INTEGER NOT NULL DEFAULT 60,
+
+                          timeout_seconds INTEGER NOT NULL DEFAULT 10,
+
+                          retries SMALLINT NOT NULL DEFAULT 3,
+
+                          body TEXT,
+
+                          ssl_verify BOOLEAN NOT NULL DEFAULT TRUE,
+
+                          follow_redirects BOOLEAN NOT NULL DEFAULT TRUE,
+
+                          enabled BOOLEAN NOT NULL DEFAULT TRUE,
+
+                          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+                          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_monitors_user
+    ON monitors(user_id);
+
+-- =====================================================
+-- OPTIONAL REQUEST HEADERS
+-- =====================================================
+
+CREATE TABLE monitor_headers (
+
+                                 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                                 monitor_id UUID NOT NULL
+                                     REFERENCES monitors(id)
+                                         ON DELETE CASCADE,
+
+                                 header_key VARCHAR(255) NOT NULL,
+
+                                 header_value TEXT NOT NULL
+);
+
+CREATE INDEX idx_headers_monitor
+    ON monitor_headers(monitor_id);
+
+-- =====================================================
+-- CURRENT STATUS
+-- =====================================================
+
+CREATE TABLE monitor_state (
+
+                               monitor_id UUID PRIMARY KEY
+                                   REFERENCES monitors(id)
+                                       ON DELETE CASCADE,
+
+                               status monitor_status NOT NULL DEFAULT 'UNKNOWN',
+
+                               last_checked_at TIMESTAMPTZ,
+
+                               last_response_time_ms INTEGER,
+
+                               last_status_code INTEGER,
+
+                               last_error TEXT,
+
+                               consecutive_failures INTEGER NOT NULL DEFAULT 0,
+
+                               consecutive_successes INTEGER NOT NULL DEFAULT 0,
+
+                               updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- =====================================================
+-- CHECK HISTORY
+-- =====================================================
+
+CREATE TABLE check_history (
+
+                               id BIGSERIAL PRIMARY KEY,
+
+                               monitor_id UUID NOT NULL
+                                   REFERENCES monitors(id)
+                                       ON DELETE CASCADE,
+
+                               status monitor_status NOT NULL,
+
+                               response_time_ms INTEGER,
+
+                               status_code INTEGER,
+
+                               error_message TEXT,
+
+                               checked_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_check_history_monitor_time
+    ON check_history(monitor_id, checked_at DESC);
+
+-- =====================================================
+-- INCIDENTS
+-- =====================================================
+
+CREATE TABLE incidents (
+
+                           id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                           monitor_id UUID NOT NULL
+                               REFERENCES monitors(id)
+                                   ON DELETE CASCADE,
+
+                           started_at TIMESTAMPTZ NOT NULL,
+
+                           resolved_at TIMESTAMPTZ,
+
+                           duration_seconds INTEGER,
+
+                           status monitor_status NOT NULL
+);
+
+CREATE INDEX idx_incidents_monitor
+    ON incidents(monitor_id);
+
+-- =====================================================
+-- NOTIFICATION CHANNELS
+-- =====================================================
+
+CREATE TABLE notification_channels (
+
+                                       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                                       user_id UUID NOT NULL
+                                           REFERENCES users(id)
+                                               ON DELETE CASCADE,
+
+                                       type notification_type NOT NULL,
+
+                                       name VARCHAR(100) NOT NULL,
+
+                                       destination TEXT NOT NULL,
+
+                                       enabled BOOLEAN NOT NULL DEFAULT TRUE,
+
+                                       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_notification_user
+    ON notification_channels(user_id);
+
+-- =====================================================
+-- NOTIFICATION LOGS
+-- =====================================================
+
+CREATE TABLE notification_logs (
+
+                                   id BIGSERIAL PRIMARY KEY,
+
+                                   incident_id UUID
+                                       REFERENCES incidents(id)
+                                           ON DELETE CASCADE,
+
+                                   channel_id UUID
+                                       REFERENCES notification_channels(id)
+                                           ON DELETE CASCADE,
+
+                                   sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+                                   success BOOLEAN NOT NULL,
+
+                                   provider_response TEXT
+);
+
+
+================================================
+FILE: app/api/auth.go
+================================================
+package api
+
+import (
+	"encoding/json"
+	"log"
+	"net"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/enftaurus/stayup/app/models"
+	"github.com/enftaurus/stayup/app/services"
+	"github.com/enftaurus/stayup/config"
+	"github.com/enftaurus/stayup/utils"
+	"github.com/gin-gonic/gin"
+)
+
+func GithubURL(c *gin.Context) {
+	state := utils.GenerateRandomState()
+	GitHubUrl, err := services.BuildUrl(config.GetEnv("GH_CLIENT"), config.GetEnv("REDIRECT_URL"), state)
+	if err != nil {
+		log.Println(err)
+		c.JSON(500, gin.H{
+			"error": `unable to redirect to github`})
+		return
+	}
+
+	c.SetCookie(
+		"oauth_state",
+		state,
+		300,
+		"/",
+		"",
+		false,
+		true,
+	)
+	c.Redirect(http.StatusFound, GitHubUrl)
+}
+
+func GIthubCallback(c *gin.Context) {
+	code := c.Query("code")
+	state := c.Query("state")
+	if code == "" || state == "" {
+		c.JSON(400, gin.H{"error": "missing code or state parameter"})
+		return
+	}
+	storedstate, err := c.Cookie("oauth_state")
+	if err != nil {
+		c.JSON(500, gin.H{"error": "missing state "})
+		return
+	}
+	if storedstate != state {
+		c.JSON(400, gin.H{"error": "invalid state"})
+		return
+	}
+	c.SetCookie(
+		"oauth_state",
+		"",
+		-1,
+		"/",
+		"",
+		false,
+		true,
+	)
+
+	data := url.Values{}
+	data.Add("client_id", config.GetEnv("GH_CLIENT"))
+	data.Add("client_secret", config.GetEnv("GH_SECRET"))
+	data.Add("code", code)
+	data.Add("redirect_uri", config.GetEnv("REDIRECT_URL"))
+	req, err := http.NewRequest(
+		http.MethodPost,
+		"https://github.com/login/oauth/access_token",
+		strings.NewReader(data.Encode()),
+	)
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Accept", "application/json")
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "unable to reach github servers"})
+		return
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		c.JSON(resp.StatusCode, gin.H{"error": resp.Status})
+		return
+	}
+	var token GitHubTokenResponse
+	err = json.NewDecoder(resp.Body).Decode(&token)
+	if err != nil {
+		c.JSON(resp.StatusCode, gin.H{"error": "unable to decode token"})
+		return
+	}
+	req, err = http.NewRequest(http.MethodGet, "https://api.github.com/user", nil)
+	if err != nil {
+		c.JSON(resp.StatusCode, gin.H{"error": err.Error()})
+	}
+	req.Header.Set("Authorization", "Bearer "+token.AccessToken)
+	req.Header.Set("Accept", "application/vnd.github+json")
+	req.Header.Set("X-GitHub-Api-Version", "2022-11-28")
+	resp, err = http.DefaultClient.Do(req)
+	if err != nil {
+		c.JSON(resp.StatusCode, gin.H{"error": err.Error()})
+		return
+	}
+	defer resp.Body.Close()
+
+	var data1 models.GithubUser
+	err = json.NewDecoder(resp.Body).Decode(&data1)
+	if err != nil {
+		c.JSON(resp.StatusCode, gin.H{"error": err.Error()})
+		return
+	}
+	browser := c.GetHeader("User-Agent")
+	metadata := models.Userip{
+		Ip:        net.ParseIP(c.ClientIP()),
+		UserAgent: &browser,
+	}
+	ctx := c.Request.Context()
+	RefreshToken, err := services.UserAuth(data1, metadata, ctx)
+	c.SetCookie(
+		"refresh_token",
+		RefreshToken,
+		5*24*60*60,
+		"/",
+		"",
+		false,
+		true,
+	)
+	c.JSON(200, gin.H{"data": data1})
+
+}
+
+
+
+================================================
+FILE: app/api/auth_types.go
+================================================
+package api
+
+type GitHubTokenResponse struct {
+	AccessToken string `json:"access_token"`
+	TokenType   string `json:"token_type"`
+	Scope       string `json:"scope"`
+}
+
+type GitHubUser struct {
+	ID        int64  `json:"id"`
+	Login     string `json:"login"`
+	Name      string `json:"name"`
+	AvatarURL string `json:"avatar_url"`
+	Email     string `json:"email"`
+}
+
+
+
+================================================
+FILE: app/api/health.go
+================================================
+package api
+
+import "github.com/gin-gonic/gin"
+
+func Health(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"status": "ok",
+	})
+}
+
+
+
+================================================
+FILE: app/models/user.go
+================================================
+package models
+
+import (
+	"time"
+
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+type User struct {
+	ID             pgtype.UUID        `db:"id" json:"id"`
+	GithubID       int64              `db:"github_id" json:"github_id,omitempty"`
+	GithubUsername string             `db:"github_username" json:"github_username,omitempty"`
+	GithubName     *string            `db:"github_name" json:"github_name,omitempty"`
+	Email          *string            `db:"email" json:"email,omitempty"`
+	AvatarURL      *string            `db:"avatar_url" json:"avatar_url,omitempty"`
+	CreatedAt      time.Time          `db:"created_at" json:"created_at"`
+	UpdatedAt      time.Time          `db:"updated_at" json:"updated_at"`
+	LastLoginAt    pgtype.Timestamptz `db:"last_login_at" json:"last_login_at"`
+}
+type GithubUser struct {
+	GithubID       int64   `db:"github_id" json:"id"`
+	GithubUsername string  `db:"github_username" json:"login"`
+	GithubName     string  `db:"github_name" json:"name"`
+	Email          *string `db:"email" json:"email"`
+	AvatarURL      *string `db:"avatar_url" json:"avatar_url"`
+}
+
+
+
+================================================
+FILE: app/models/user_session.go
+================================================
+package models
+
+import (
+	"net"
+
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+type Userip struct {
+	Ip        net.IP  `db:"ip_address" json:"ip"`
+	UserAgent *string `db:"user_agent" json:"user_agent"`
+}
+
+type User_session struct {
+	Id           pgtype.UUID         `db:"id"`
+	UserId       pgtype.UUID         `db:"user_id"`
+	RefreshToken *string             `db:"refresh_token_hash" json:"refresh_token" `
+	ExpiresAt    *pgtype.Timestamptz `db:"expires_at" json:"expires"`
+	UserAgent    *string             `db:"user_agent" json:"user_agent"`
+	Ip           *net.IP             `db:"ip_address" json:"ip"`
+	CreatedAt    *pgtype.Timestamptz `db:"created_at" json:"created_at"`
+	LastUsedAt   *pgtype.Timestamptz `db:"last_used_at" json:"last_used_at"`
+}
+
+
+
+================================================
+FILE: app/repository/register.go
+================================================
+package repository
+
+import (
+	"context"
+
+	"github.com/enftaurus/stayup/app/models"
+	"github.com/enftaurus/stayup/utils"
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+func InsertUser(ctx context.Context, user models.GithubUser) (pgtype.UUID, error) {
+	var userID pgtype.UUID
+
+	err := utils.DB.QueryRow(
+		ctx,
+		`INSERT INTO users (
+			github_id,
+			github_username,
+			github_name,
+			email,
+			avatar_url
+		)
+		VALUES ($1, $2, $3, $4, $5)
+		RETURNING id`,
+		user.GithubID,
+		user.GithubUsername,
+		user.GithubName,
+		user.Email,
+		user.AvatarURL,
+	).Scan(&userID)
+
+	if err != nil {
+		return pgtype.UUID{}, err
+	}
+
+	return userID, nil
+}
+
+
+
+================================================
+FILE: app/repository/user_session.go
+================================================
+package repository
+
+import (
+	"context"
+	"log"
+
+	"github.com/enftaurus/stayup/app/models"
+	"github.com/enftaurus/stayup/utils"
+)
+
+func UserSession(session_details models.User_session, ctx context.Context) error {
+	_, err := utils.DB.Exec(
+		ctx,
+		`INSERT INTO user_session (
+            user_id,refresh_token_hash,expires_at,ip_address,user_agent ) VALUES ($1,$2,$3,$4,$5)`,
+		session_details.UserId,
+		session_details.RefreshToken,
+		session_details.ExpiresAt,
+		session_details.Ip,
+		session_details.UserAgent,
+	)
+	if err != nil {
+		log.Println("unable to insert session details into db ", err)
+		return err
+
+	}
+	return nil
+}
+
+
+
+================================================
+FILE: app/repository/userid.go
+================================================
+package repository
+
+import (
+	"context"
+
+	"github.com/enftaurus/stayup/utils"
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+func UserID(githubID int64, ctx context.Context) (pgtype.UUID, error) {
+	var userID pgtype.UUID
+
+	err := utils.DB.QueryRow(
+		ctx,
+		`SELECT id FROM users WHERE github_id = $1`,
+		githubID,
+	).Scan(&userID)
+
+	if err != nil {
+		return pgtype.UUID{}, err
+	}
+
+	return userID, nil
+}
+
+
+
+================================================
+FILE: app/services/github.go
+================================================
+package services
+
+import (
+	"log"
+	"net/url"
+)
+
+func BuildUrl(clientid, redirecturl, state string) (string, error) {
+	BaseUrl, err := url.Parse("https://github.com/login/oauth/authorize")
+	if err != nil {
+		log.Fatal(err)
+	}
+	params := url.Values{}
+	params.Add("client_id", clientid)
+	params.Add("redirect_uri", redirecturl)
+	params.Add("scope", "read:user user:mail")
+	params.Add("state", state)
+	BaseUrl.RawQuery = params.Encode()
+	return BaseUrl.String(), nil
+}
+
+
+
+================================================
+FILE: app/services/login_user.go
+================================================
+package services
+
+import (
+	"context"
+	"crypto/sha256"
+	"encoding/hex"
+	"log"
+	"time"
+
+	"github.com/enftaurus/stayup/app/models"
+	"github.com/enftaurus/stayup/app/repository"
+	"github.com/enftaurus/stayup/utils"
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+func hash_token(token string) string {
+	hash := sha256.Sum256([]byte(token))
+	return hex.EncodeToString(hash[:])
+}
+func user_login(uuid pgtype.UUID, metadata models.Userip, ctx context.Context) (string, error) {
+	token, err := utils.GenerateRefreshToken()
+	if err != nil {
+		log.Println("unable to generate a reftesh token", err)
+		return "", err
+	}
+	expiresAt := pgtype.Timestamptz{
+		Time:  time.Now().UTC().Add(5 * 24 * time.Hour),
+		Valid: true,
+	}
+	hashedToken := hash_token(token)
+	user_session := models.User_session{
+		UserId:       uuid,
+		RefreshToken: &hashedToken,
+		ExpiresAt:    &expiresAt,
+		Ip:           &metadata.Ip,
+		UserAgent:    metadata.UserAgent,
+	}
+	err := repository.UserSession(user_session, ctx)
+	if err != nil {
+		log.Println(err)
+		return "", err
+	}
+	return token, nil
+}
+
+
+
+================================================
+FILE: app/services/user_auth.go
+================================================
+package services
+
+import (
+	"context"
+	"errors"
+	"log"
+
+	"github.com/enftaurus/stayup/app/models"
+	"github.com/enftaurus/stayup/app/repository"
+	"github.com/jackc/pgx/v5"
+)
+
+func UserAuth(GithubUser models.GithubUser, metadata models.Userip, ctx context.Context) (string, error) {
+	userid, err := repository.UserID(GithubUser.GithubID, ctx)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			userid, err = register_user(GithubUser, ctx)
+			if err != nil {
+				log.Println("unable to register", err)
+				return "", err
+			}
+		}
+		return "", err
+	}
+
+	hashed_token, err := user_login(userid, metadata, ctx)
+	if err != nil {
+		log.Println("unable to generate refresh token :", err)
+		return "", err
+	}
+	return hashed_token, nil
+
+}
+
+
+
+================================================
+FILE: app/services/user_registrtion.go
+================================================
+package services
+
+import (
+	"context"
+	"log"
+
+	"github.com/enftaurus/stayup/app/models"
+	"github.com/enftaurus/stayup/app/repository"
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+func register_user(user models.GithubUser, ctx context.Context) (pgtype.UUID, error) {
+
+	uuid, err := repository.InsertUser(ctx, user)
+	if err != nil {
+		log.Println("unable to insert user")
+		return pgtype.UUID{}, err
+	}
+	return uuid, nil
+}
+
+
+
+================================================
+FILE: config/config.go
+================================================
+package config
+
+import (
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+)
+
+func LoadEnv() {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Failed to load .env")
+	}
+}
+
+func GetEnv(key string) string {
+	return os.Getenv(key)
+}
+
+
+
+================================================
+FILE: utils/database.go
+================================================
+package utils
+
+import (
+	"context"
+	"log"
+
+	"github.com/jackc/pgx/v5/pgxpool"
+)
+
+var DB *pgxpool.Pool
+
+func Connect(url string) error {
+	var err error
+	DB, err = pgxpool.New(context.Background(), url)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err = DB.Ping(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Connected to PostgreSQL")
+	return nil
+}
+
+
+
+================================================
+FILE: utils/random_refreshtoken.go
+================================================
+package utils
+
+import (
+	"crypto/rand"
+	"encoding/base64"
+)
+
+func GenerateRefreshToken() (string, error) {
+	b := make([]byte, 32)
+
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", err
+	}
+
+	return base64.RawURLEncoding.EncodeToString(b), nil
+}
+
+
+================================================
+FILE: utils/util.go
+================================================
+package utils
+
+import (
+	"crypto/rand"
+	"encoding/base64"
+)
+
+func GenerateRandomState() string {
+	b := make([]byte, 32)
+	rand.Read(b)
+	return base64.RawURLEncoding.EncodeToString(b)
+}
+
+
