@@ -36,7 +36,20 @@ CREATE TYPE notification_type AS ENUM (
 -- USERS
 -- =====================================================
 
-C
+CREATE TABLE users (
+                       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+                       github_id BIGINT UNIQUE NOT NULL,
+                       github_username VARCHAR(100) NOT NULL,
+                       github_name VARCHAR(255),
+
+                       email VARCHAR(255),
+                       avatar_url TEXT,
+
+                       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                       last_login_at TIMESTAMPTZ
+);
 CREATE INDEX idx_users_github_id ON users(github_id);
 
 -- =====================================================

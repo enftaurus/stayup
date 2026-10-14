@@ -20,7 +20,7 @@ func UserAuth(GithubUser models.GithubUser, metadata models.Userip, ctx context.
 				return "", err
 			}
 		}
-		return "", err
+		else {return "", err }
 	}
 
 	hashed_token, err := user_login(userid, metadata, ctx)
