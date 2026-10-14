@@ -1,12 +1,14 @@
 #!/bin/bash
+set -e
 
-# Terminate background processes on Ctrl+C (SIGINT/SIGTERM)
+export PATH=$PATH:/usr/local/go/bin
+
 cleanup() {
     echo ""
     echo "=========================================="
     echo " Shutting down StayUp services..."
     echo "=========================================="
-    kill $(jobs -p) 2>/dev/null
+    kill $(jobs -p) 2>/dev/null || true
     exit 0
 }
 
@@ -15,6 +17,10 @@ trap cleanup SIGINT SIGTERM
 echo "=========================================="
 echo " Starting StayUp Development Environment"
 echo "=========================================="
+
+# Ensure Postgres and Kafka are running via Docker
+echo "[Docker] Ensuring PostgreSQL and Kafka are running..."
+docker compose up -d
 
 # Start Go Backend
 echo "[Backend] Starting Go server at http://localhost:8080..."
